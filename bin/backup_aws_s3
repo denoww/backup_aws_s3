@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
 
 require 'backup_aws_s3'
-# puts Hola.hi(ARGV[0])
-puts "aaaaaaaaaaaaaaaaaaaaaaaaa"
+BackupS3.new(
+  name:             ARGV[0],
+  source:           ARGV[1],
+  dest:             ARGV[2],
+  keep:             ARGV[3]
+)

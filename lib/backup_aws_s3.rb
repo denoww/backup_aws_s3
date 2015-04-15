@@ -8,17 +8,23 @@ require 'yaml'
 # no docs
 class BackupS3
   def initialize(opt = {})
+    unless ENV['S3S3MIRROR_PATH'] && ENV['S3_ACCESS_KEY_ID'] && ENV['S3_SECRET_KEY_ID']
+      fail 'Not found any of these enviroment variables: S3_ACCESS_KEY_ID, S3_SECRET_KEY_ID, S3S3MIRROR_PATH'
+    end
     create opt
   end
 
   def create(opt = {})
-    name = opt[:name]
-    dest = opt[:dest]
+    name   = opt[:name]
+    dest   = opt[:dest]
+    source = opt[:source]
+    keep   = opt[:keep]
+    fail 'Missing any of these parameters: name, dest, source or keep' unless name && dest && source && keep
     p "Creating backup: #{name} in #{dest} "
     Open3.popen3('nroff -man') do |stdin, stdout, stderr|
-      # system "cd #{ENV['S3S3MIRROR_PATH']} && ./s3s3mirror.sh #{opt[:source]} #{dest}"
-      # p "Created backup: #{name} in #{dest} "
-      BackupS3::Cycler.new(name).cycle!(path: dest, keep: opt[:keep])
+      # system "cd #{ENV['S3S3MIRROR_PATH']} && ./s3s3mirror.sh #{source} #{dest}"
+      p "Created backup: #{name} in #{dest} "
+      BackupS3::Cycler.new(name).cycle!(path: dest, keep: keep)
     end
   end
 
@@ -56,7 +62,7 @@ class BackupS3
     # Returns path to the YAML data file.
     def yaml_file
       @yaml_file ||= begin
-        File.join('.data', 'last_s3_backups', "#{ @name }.yml")
+        File.join('~/.backup_aws_s3', 'last_s3_backups', "#{ @name }.yml")
       end
     end
 
@@ -79,10 +85,3 @@ class BackupS3
     end
   end
 end
-
-BackupS3.new(
-  name:             ARGV[0],
-  source:           ARGV[1],
-  dest:             ARGV[2],
-  keep:             ARGV[3]
-)
