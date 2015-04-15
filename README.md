@@ -24,7 +24,7 @@ Insert you aws keys
     $ sudo touch /var/log/s3s3mirror.log
     $ sudo chmod 777 /var/log/s3s3mirror.log
 
-## Create Enviroment Variables in /etc/enviroments
+## Create Enviroment Variables in /etc/enviroment
 
     export S3_BUCKET_BACKUP="xxxxxxxxxxx"
     export S3_ACCESS_KEY_ID="xxxxxxxxxxx"
