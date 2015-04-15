@@ -22,7 +22,7 @@ class BackupS3
     fail 'Missing any of these parameters: name, dest, source or keep' unless name && dest && source && keep
     p "Creating backup: #{name} in #{dest} "
     Open3.popen3('nroff -man') do |stdin, stdout, stderr|
-      # system "cd #{ENV['S3S3MIRROR_PATH']} && ./s3s3mirror.sh #{source} #{dest}"
+      system "cd #{ENV['S3S3MIRROR_PATH']} && ./s3s3mirror.sh #{source} #{dest}"
       p "Created backup: #{name} in #{dest} "
       BackupS3::Cycler.new(name).cycle!(path: dest, keep: keep)
     end
