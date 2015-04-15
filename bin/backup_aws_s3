@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'backup_aws_s3'
+# puts Hola.hi(ARGV[0])
+puts "aaaaaaaaaaaaaaaaaaaaaaaaa"
