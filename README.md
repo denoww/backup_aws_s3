@@ -1,6 +1,6 @@
 # BackupAwsS3
 
-TODO: Write a gem description
+Backup s3 folders to another s3
 
 ## Installation
 
@@ -46,6 +46,8 @@ Insert you aws keys
 ## Usage
 
     $ ruby backup_uploads.rb identification_name source dest keep
+    
+    source and dest are: bucket_name/folder/subfolder...
 
 ### Example
 
