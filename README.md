@@ -4,18 +4,6 @@ Backup s3 folders to another s3
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'backup_aws_s3'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
     $ gem install backup_aws_s3
 
 ## Pre-Requisites Installss
@@ -45,14 +33,20 @@ Insert you aws keys
 
 ## Usage
 
-    $ ruby backup_uploads.rb identification_name source dest keep
+    $ backup_aws_s3 identification_name source dest keep
     
-    source and dest are: bucket_name/folder/subfolder...
+
+    Explain
+
+    identification_name: app name and behaviour of backup
+    source:              bucket_name/folder/subfolder...
+    dest:                bucket_name/folder/subfolder...
+    keep:                amount of backups needs to keep
 
 ### Example
 
-    $ ruby backup_uploads.rb "app1_last_30_days"    "scproduction/" "${S3_BUCKET_BACKUP}/upload_files/app1/$(date +%Y.%m.%d.%H.%M.%S)/" 30
-    $ ruby backup_uploads.rb "app1_20_in_20_minuts" "scproduction/" "${S3_BUCKET_BACKUP}/upload_files/erp/$(date +%Y.%m.%d.%H.%M.%S)/" 216
+    $ backup_aws_s3 "app1_last_30_days"    "scproduction/" "${S3_BUCKET_BACKUP}/upload_files/app1/$(date +%Y.%m.%d.%H.%M.%S)/" 30
+    $ backup_aws_s3 "app1_20_in_20_minuts" "scproduction/" "${S3_BUCKET_BACKUP}/upload_files/erp/$(date +%Y.%m.%d.%H.%M.%S)/" 216
 
 ## Feel free to put commands above in crontab
 
