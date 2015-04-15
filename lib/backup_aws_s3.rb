@@ -62,7 +62,8 @@ class BackupS3
     # Returns path to the YAML data file.
     def yaml_file
       @yaml_file ||= begin
-        File.join('~/.backup_aws_s3', 'last_s3_backups', "#{ @name }.yml")
+        home_path = File.expand_path('~')
+        File.join(home_path, 'backup_aws_s3', "#{ @name }.yml")
       end
     end
 
