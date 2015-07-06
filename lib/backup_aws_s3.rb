@@ -19,12 +19,12 @@ class BackupS3
     dest   = opt[:dest]
     source = opt[:source]
     keep   = opt[:keep]
-    fail 'Missing any of these parameters: name, dest, source or keep' unless name && dest && source && keep
+    fail 'Missing any of these parameters: name, dest, source or keep' unless name && dest && source
     p "Creating backup: #{name} in #{dest} "
     Open3.popen3('nroff -man') do |stdin, stdout, stderr|
       system "cd #{ENV['S3S3MIRROR_PATH']} && ./s3s3mirror.sh #{source} #{dest}"
       p "Created backup: #{name} in #{dest} "
-      BackupS3::Cycler.new(name).cycle!(path: dest, keep: keep)
+      BackupS3::Cycler.new(name).cycle!(path: dest, keep: keep) if keep
     end
   end
 
